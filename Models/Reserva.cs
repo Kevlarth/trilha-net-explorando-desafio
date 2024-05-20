@@ -17,11 +17,9 @@ namespace DesafioProjetoHospedagem.Models
 
         public void CadastrarHospedes(List<Pessoa> hospedes)
         {
-            // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
-            // *IMPLEMENTE AQUI*
             try
             {
-                if (hospedes != null && hospedes.Count <= Suite.Capacidade)
+                if (hospedes != null && Suite.Capacidade >= hospedes.Count)
                 {
                     Hospedes = hospedes;
                 }
@@ -32,8 +30,7 @@ namespace DesafioProjetoHospedagem.Models
             }
             catch (Exception ex)
             {
-                // Capture a exceção e trate-a de acordo com suas necessidades
-                Console.WriteLine($"Erro: {ex.Message}");  // Exemplo de tratamento básico
+                Console.WriteLine($"Erro: {ex.Message}");
             }
 
         }
@@ -45,21 +42,14 @@ namespace DesafioProjetoHospedagem.Models
 
         public int ObterQuantidadeHospedes()
         {
-            // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
             return Hospedes.Count;
         }
 
         public decimal CalcularValorDiaria()
         {
-            // TODO: Retorna o valor da diária
-            // Cálculo: DiasReservados X Suite.ValorDiaria
-            // *IMPLEMENTE AQUI*
-            decimal valor = 0;
-
-            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
-            bool Decena = DiasReservados >= 10;
-            Decimal desconto = (Decena ? (valor = (DiasReservados * Suite.ValorDiaria) * 0.9M) : valor = (DiasReservados * Suite.ValorDiaria));
+            decimal valor = DiasReservados >= 10 ? DiasReservados * Suite.ValorDiaria * 0.9m : DiasReservados * Suite.ValorDiaria;
             return valor;
+
 
         }
     }
